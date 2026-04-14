@@ -5,6 +5,10 @@ import { ALLOWED_ICONS } from "@/lib/guestbook";
 const RATE_LIMIT_MS = 60_000;
 const postCooldownByIp = new Map<string, number>();
 
+function isGuestbookConfigured(): boolean {
+  return Boolean(process.env.DATABASE_URL);
+}
+
 function stripHtml(value: string): string {
   return value.replace(/<[^>]*>/g, "").trim();
 }
@@ -35,6 +39,13 @@ function pruneRateMap() {
 }
 
 export async function GET() {
+  if (!isGuestbookConfigured()) {
+    return NextResponse.json(
+      { entries: [], available: false, error: "guestbook is not configured yet" },
+      { status: 503 }
+    );
+  }
+
   try {
     const entries = await prisma.guestbookEntry.findMany({
       where: { isPrivate: false },
@@ -48,16 +59,23 @@ export async function GET() {
       }
     });
 
-    return NextResponse.json({ entries });
+    return NextResponse.json({ entries, available: true });
   } catch {
     return NextResponse.json(
-      { error: "failed to load guestbook" },
+      { entries: [], available: false, error: "failed to load guestbook" },
       { status: 500 }
     );
   }
 }
 
 export async function POST(request: Request) {
+  if (!isGuestbookConfigured()) {
+    return NextResponse.json(
+      { error: "guestbook backend is not configured yet" },
+      { status: 503 }
+    );
+  }
+
   let body: unknown;
 
   try {

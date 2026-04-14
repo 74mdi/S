@@ -9,16 +9,7 @@ export const ALLOWED_ICONS = [
   "✿",
   "⊕",
   "⟢",
-  "🌙",
-  "🔥",
-  "⚡",
-  "🌿",
-  "🦋",
-  "🐺",
-  "🌊",
-  "⭐",
-  "🎯",
-  "🪐"
+
 ] as const;
 
 export const SHUFFLE_NAMES = [

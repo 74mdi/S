@@ -8,6 +8,7 @@ import { GuestbookEntry, GuestbookEntryItem } from "@/components/GuestbookEntry"
 
 type GuestbookProps = {
   initialEntries: GuestbookEntryItem[];
+  available?: boolean;
 };
 
 const MAX_NAME = 30;
@@ -17,7 +18,7 @@ function randomItem(list: readonly string[]): string {
   return list[Math.floor(Math.random() * list.length)] ?? list[0];
 }
 
-export function Guestbook({ initialEntries }: GuestbookProps) {
+export function Guestbook({ initialEntries, available = true }: GuestbookProps) {
   const [entries, setEntries] = useState<GuestbookEntryItem[]>(initialEntries);
   const [name, setName] = useState("");
   const [icon, setIcon] = useState<string>(ALLOWED_ICONS[0]);
@@ -77,7 +78,8 @@ export function Guestbook({ initialEntries }: GuestbookProps) {
     return "text-[var(--muted)]";
   }, [message.length]);
 
-  const canSubmit = name.trim().length > 0 && message.trim().length > 0 && !submitting;
+  const canSubmit =
+    available && name.trim().length > 0 && message.trim().length > 0 && !submitting;
 
   function handleNameChange(value: string) {
     setName(value.slice(0, MAX_NAME));
@@ -201,11 +203,12 @@ export function Guestbook({ initialEntries }: GuestbookProps) {
         <textarea
           rows={3}
           className="textarea"
-          placeholder="leave a message~"
+          placeholder={available ? "leave a message~" : "guestbook is offline right now"}
           value={message}
           onChange={(event) => setMessage(event.target.value.slice(0, MAX_MESSAGE))}
           maxLength={MAX_MESSAGE}
           aria-label="leave a message"
+          disabled={!available}
         />
         <div className="mt-2 sm:flex sm:items-center">
           <label className="muted inline-flex min-h-11 cursor-pointer items-center text-[12px]">
@@ -214,6 +217,7 @@ export function Guestbook({ initialEntries }: GuestbookProps) {
               checked={isPrivate}
               onChange={(event) => setIsPrivate(event.target.checked)}
               className="mr-2 h-4 w-4 accent-[var(--accent)]"
+              disabled={!available}
             />
             as private message
           </label>
@@ -231,6 +235,12 @@ export function Guestbook({ initialEntries }: GuestbookProps) {
 
         {error ? <p className="mt-2 text-[12px] text-[#e05a5a]">{error}</p> : null}
         {notice ? <p className="mt-2 text-[12px] text-[var(--accent2)]">{notice}</p> : null}
+        {!available ? (
+          <p className="mt-2 text-[12px] text-[var(--muted)]">
+            guestbook backend is not configured yet. add your Neon `DATABASE_URL` and it will
+            work again.
+          </p>
+        ) : null}
       </form>
 
       <div className="mt-2 min-h-[120px]">

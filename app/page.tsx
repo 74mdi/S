@@ -1,12 +1,23 @@
 import { AdBanner } from "@/components/AdBanner";
 import { GitHubLastSeen } from "@/components/GitHubLastSeen";
 import { Guestbook } from "@/components/Guestbook";
+import { LastFmLastListened, LastFmNowPlaying } from "@/components/LastFmStatus";
 import type { GuestbookEntryItem } from "@/components/GuestbookEntry";
 import { prisma } from "@/lib/prisma";
 
 export const dynamic = "force-dynamic";
 
-async function getInitialEntries(): Promise<GuestbookEntryItem[]> {
+async function getInitialEntries(): Promise<{
+  entries: GuestbookEntryItem[];
+  available: boolean;
+}> {
+  if (!process.env.DATABASE_URL) {
+    return {
+      entries: [],
+      available: false
+    };
+  }
+
   try {
     const entries = await prisma.guestbookEntry.findMany({
       where: { isPrivate: false },
@@ -20,17 +31,23 @@ async function getInitialEntries(): Promise<GuestbookEntryItem[]> {
       }
     });
 
-    return entries.map((entry) => ({
-      ...entry,
-      createdAt: entry.createdAt.toISOString()
-    }));
+    return {
+      entries: entries.map((entry: (typeof entries)[number]) => ({
+        ...entry,
+        createdAt: entry.createdAt.toISOString()
+      })),
+      available: true
+    };
   } catch {
-    return [];
+    return {
+      entries: [],
+      available: false
+    };
   }
 }
 
 export default async function HomePage() {
-  const initialEntries = await getInitialEntries();
+  const guestbookState = await getInitialEntries();
 
   return (
     <main>
@@ -42,21 +59,21 @@ export default async function HomePage() {
           i am <span className="name">7amdi</span> aka <span className="aka">koko</span>{" "}
           <span className="arabic">ⵎⵓⵃⴰⵎⵎⴷ</span>
           <br />
-          full-time web dev, part-time linux-breaker
+          i build web stuff and break linux for sport
           <br />
-          most of the stuff i&apos;m proud of lives on my{" "}
+          you can stalk my code on{" "}
           <a href="https://github.com/74mdi" target="_blank" rel="noopener noreferrer">
             github
           </a>
-          , the rest is still in my head
+          . the half-finished ideas live in my notes app.
         </p>
       </section>
 
       <section className="section-fade fade-delay-2">
-        <h2>extremely interesting info (no):</h2>
+        <h2>tiny facts about me:</h2>
         <div className="info-table">
           <span className="info-label">location</span>
-          <span className="info-value">🇲🇦 morocco, always</span>
+          <span className="info-value">🇲🇦 morocco</span>
 
           <span className="info-label">langs</span>
           <span className="info-value">
@@ -72,13 +89,23 @@ export default async function HomePage() {
           </span>
 
           <span className="info-label">current mood</span>
-          <span className="info-value">debugging something i wrote yesterday</span>
+          <span className="info-value">debugging my own bug from yesterday</span>
+
+          <span className="info-label">listening</span>
+          <span className="info-value min-h-[1.25rem]">
+            <LastFmNowPlaying />
+          </span>
+
+          <span className="info-label">last listened</span>
+          <span className="info-value min-h-[1.25rem]">
+            <LastFmLastListened />
+          </span>
 
           <span className="info-label">tokens wasted</span>
           <span className="info-value">
-            past 30d: uncountable
+            past 30d: way too many
             <br />
-            all time: astronomical
+            all time: enough to heat a small house
           </span>
 
           <span className="info-label">fav color</span>
@@ -91,10 +118,10 @@ export default async function HomePage() {
           </span>
 
           <span className="info-label">fav os</span>
-          <span className="info-value">fedora linux (gnome) — always</span>
+          <span className="info-value">fedora linux (gnome)</span>
 
           <span className="info-label">fav editor</span>
-          <span className="info-value">windsurf ide w/ claude inside</span>
+          <span className="info-value">cursor + terminal + coffee</span>
 
           <span className="info-label">fav font</span>
           <span className="info-value">EB Garamond + JetBrains Mono</span>
@@ -117,7 +144,7 @@ export default async function HomePage() {
       </section>
 
       <section className="section-fade fade-delay-3">
-        <h2>contact me (in order of preference):</h2>
+        <h2>find me here:</h2>
         <div className="contact-table">
           <span className="contact-label">github</span>
           <a href="https://github.com/74mdi" target="_blank" rel="noopener noreferrer">
@@ -125,26 +152,29 @@ export default async function HomePage() {
           </a>
 
           <span className="contact-label">telegram</span>
-          <span>ask nicely first</span>
+          <span>ask first</span>
 
           <span className="contact-label">matrix</span>
-          <span>somewhere out there</span>
+          <span>i forget to check it, but yes</span>
 
           <span className="contact-label">email</span>
           <span>koko [at] 7amdi [dot] dev</span>
 
           <span className="contact-label">carrier pigeon</span>
-          <span>please don&apos;t</span>
+          <span>wrong continent</span>
 
           <span className="contact-label">post pigeons</span>
-          <span>absolutely not</span>
+          <span>they are on strike</span>
         </div>
       </section>
 
       <section className="section-fade fade-delay-4">
         <h2>guestbook</h2>
         <p className="guestbook-title">{"// entries are pre-moderated, vibes only."}</p>
-        <Guestbook initialEntries={initialEntries} />
+        <Guestbook
+          initialEntries={guestbookState.entries}
+          available={guestbookState.available}
+        />
       </section>
 
       <section className="section-fade fade-delay-5">
@@ -165,7 +195,7 @@ export default async function HomePage() {
           <li>
             - <a href="#">nexahub</a>
             <div className="sub-comment">
-              {"// saas platform, 500+ features, still cooking 👨‍🍳"}
+              {"// saas platform, huge feature list, still cooking"}
             </div>
           </li>
           <li>
@@ -178,7 +208,7 @@ export default async function HomePage() {
       </section>
 
       <footer className="section-fade fade-delay-6">
-        <span>7amdi © 2026 — built with next.js, caffeine, and claude </span>
+        <span>7amdi © 2026 · built with next.js, caffeine, and stubbornness </span>
         <br />
         <span className="arabic" style={{ color: "var(--accent2)" }}>
           ⵎⵓⵃⴰⵎⵎⴷ ⴰⵎⴰⵍⵃⴰⵏⵏⴰ
