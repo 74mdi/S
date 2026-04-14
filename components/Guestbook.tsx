@@ -172,7 +172,7 @@ export function Guestbook({ initialEntries }: GuestbookProps) {
 
   return (
     <div>
-      <div className="gb-panel">
+      <div className="gb-panel gb-panel-identity">
         <p className="muted mb-2 text-[12px] italic">{"// identity card"}</p>
         <div className="rounded-[2px] border border-[var(--border)] bg-[#1a1713] p-2">
           <div className="sm:flex sm:items-start">
@@ -197,7 +197,7 @@ export function Guestbook({ initialEntries }: GuestbookProps) {
         </div>
       </div>
 
-      <form className="gb-panel" onSubmit={handleSubmit}>
+      <form className="gb-panel gb-panel-compose" onSubmit={handleSubmit}>
         <textarea
           rows={3}
           className="textarea"

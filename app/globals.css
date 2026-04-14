@@ -12,6 +12,11 @@
   --surface: #151310;
   --link: #b89a6a;
   --link-hover: #e8c882;
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-smooth: cubic-bezier(0.32, 0.72, 0, 1);
+  --dur-fast: 140ms;
+  --dur-normal: 200ms;
+  --dur-slow: 280ms;
 }
 
 * {
@@ -46,6 +51,9 @@ a {
   color: var(--link);
   text-decoration: underline;
   text-underline-offset: 2px;
+  transition:
+    color var(--dur-normal) var(--ease-out),
+    opacity var(--dur-normal) var(--ease-out);
 }
 
 a:hover {
@@ -79,7 +87,8 @@ footer {
 }
 
 .section-fade {
-  animation: fade-in 0.5s ease both;
+  animation: fade-in var(--dur-slow) var(--ease-out) both;
+  will-change: transform, opacity;
 }
 
 .banner-base {
@@ -93,7 +102,11 @@ footer {
   min-height: 54px;
   display: flex;
   align-items: center;
-  animation: fade-in 0.35s ease both;
+  animation: fade-in 260ms var(--ease-out) both;
+  transition:
+    border-color var(--dur-normal) var(--ease-out),
+    background-color var(--dur-normal) var(--ease-out),
+    color var(--dur-normal) var(--ease-out);
 }
 
 .banner-tip {
@@ -105,7 +118,8 @@ footer {
 }
 
 .tip-fade {
-  animation: tip-fade 6s ease-in-out infinite;
+  animation: tip-fade 6s var(--ease-smooth) infinite;
+  will-change: transform, opacity;
 }
 
 .greeting {
@@ -158,6 +172,10 @@ footer {
   padding: 0 5px;
   border-radius: 2px;
   margin-right: 3px;
+  transition:
+    transform var(--dur-normal) var(--ease-out),
+    border-color var(--dur-normal) var(--ease-out),
+    background-color var(--dur-normal) var(--ease-out);
 }
 
 .contact-table {
@@ -185,10 +203,18 @@ footer {
   margin-bottom: 0.5rem;
   font-size: 12.5px;
   overflow-wrap: anywhere;
+  transform-origin: left top;
+  animation: entry-in 240ms var(--ease-out) both;
+  transition:
+    transform var(--dur-normal) var(--ease-out),
+    border-color var(--dur-normal) var(--ease-out),
+    opacity var(--dur-normal) var(--ease-out);
+  will-change: transform, opacity;
 }
 
 .entry.pending {
   opacity: 0.6;
+  transform: translateY(2px);
 }
 
 .entry-header {
@@ -226,6 +252,20 @@ footer {
   border: 1px solid var(--border);
   padding: 0.6rem 0.8rem;
   margin-top: 0.5rem;
+  animation: panel-in 260ms var(--ease-out) both;
+  transition:
+    transform var(--dur-normal) var(--ease-out),
+    border-color var(--dur-normal) var(--ease-out),
+    opacity var(--dur-normal) var(--ease-out);
+  will-change: transform, opacity;
+}
+
+.gb-panel-identity {
+  animation-delay: 40ms;
+}
+
+.gb-panel-compose {
+  animation-delay: 90ms;
 }
 
 .field,
@@ -238,6 +278,10 @@ footer {
   font-size: 13px;
   width: 100%;
   outline: none;
+  transition:
+    border-color var(--dur-normal) var(--ease-out),
+    color var(--dur-normal) var(--ease-out),
+    opacity var(--dur-normal) var(--ease-out);
 }
 
 .field {
@@ -254,6 +298,30 @@ footer {
 .field::placeholder,
 .textarea::placeholder {
   color: var(--muted);
+}
+
+.field:focus,
+.textarea:focus {
+  border-bottom-color: var(--accent);
+}
+
+button {
+  transition:
+    transform var(--dur-normal) var(--ease-out),
+    opacity var(--dur-normal) var(--ease-out),
+    border-color var(--dur-normal) var(--ease-out),
+    background-color var(--dur-normal) var(--ease-out),
+    color var(--dur-normal) var(--ease-out);
+  transform: translateZ(0);
+}
+
+button:active {
+  transform: scale(0.97);
+  transition-duration: var(--dur-fast);
+}
+
+button:disabled:active {
+  transform: none;
 }
 
 .muted {
@@ -299,6 +367,22 @@ footer {
   animation-delay: 0.3s;
 }
 
+@media (hover: hover) and (pointer: fine) {
+  .entry:hover {
+    transform: translateY(-2px);
+    border-color: #3a332c;
+  }
+
+  .gb-panel:hover {
+    border-color: #332d26;
+  }
+
+  .tag:hover {
+    transform: translateY(-1px);
+    border-color: #3b3328;
+  }
+}
+
 @media (max-width: 480px) {
   .info-table,
   .contact-table {
@@ -320,7 +404,7 @@ footer {
 @keyframes fade-in {
   from {
     opacity: 0;
-    transform: translateY(8px);
+    transform: translateY(7px);
   }
 
   to {
@@ -329,21 +413,49 @@ footer {
   }
 }
 
+@keyframes panel-in {
+  from {
+    opacity: 0;
+    transform: translateY(6px) scale(0.99);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes entry-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px) scale(0.98);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
 @keyframes tip-fade {
   0% {
     opacity: 0;
+    transform: translateY(3px);
   }
 
   10% {
     opacity: 1;
+    transform: translateY(0);
   }
 
   80% {
     opacity: 1;
+    transform: translateY(0);
   }
 
   100% {
     opacity: 0.55;
+    transform: translateY(-1px);
   }
 }
 
