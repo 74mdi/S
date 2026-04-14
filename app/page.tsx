@@ -54,18 +54,11 @@ export default async function HomePage() {
       <AdBanner />
 
       <section className="greeting section-fade fade-delay-1">
-        <p>mrhba~</p>
+        <p>salam~</p>
         <p>
-          i am <span className="name">7amdi</span> aka <span className="aka">koko</span>{" "}
-          <span className="arabic">ⵎⵓⵃⴰⵎⵎⴷ</span>
-          <br />
+          ana <span className="name">mohamed</span> aka <span className="aka">7amdi</span>
           i build web stuff and break linux 3lah? diha fmok
           <br />
-          you can stalk my code on{" "}
-          <a href="https://github.com/74mdi" target="_blank" rel="noopener noreferrer">
-            github
-          </a>
-          . the half-finished ideas live in my notes app.
         </p>
       </section>
 
@@ -79,7 +72,7 @@ export default async function HomePage() {
           <span className="info-value">
             <span className="tag">darija</span>
             <span className="tag">en</span>
-            <span className="tag">tamazight</span>
+            <span className="tag">chel7a</span>
           </span>
 
           <span className="info-label">last seen</span>
@@ -102,9 +95,9 @@ export default async function HomePage() {
 
           <span className="info-label">tokens wasted</span>
           <span className="info-value">
-            past 30d: bzff
+            past 30d: bzff 
             <br />
-            all time: bzf mn bzfff
+            all time: bzf mn bzfff(agodii)
           </span>
 
           <span className="info-label">fav color</span>
