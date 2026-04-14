@@ -32,7 +32,7 @@ body {
 body {
   font-size: 12.5px;
   max-width: 680px;
-  margin: 0 auto;
+  margin: 0;
   padding: 2rem 1.25rem 4rem;
 }
 
@@ -127,7 +127,7 @@ footer {
 }
 
 .arabic {
-  font-family: var(--font-garamond), serif;
+  font-family: var(--font-garamond), var(--font-tifinagh), serif;
   font-size: 16px;
   color: var(--accent);
 }

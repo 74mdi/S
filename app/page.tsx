@@ -180,7 +180,10 @@ export default async function HomePage() {
       <footer className="section-fade fade-delay-6">
         <span>7amdi © 2026 — built with next.js, caffeine, and claude </span>
         <br />
-        <span style={{ color: "var(--accent2)" }}>ⵎⵓⵃⴰⵎⵎⴷ ⴰⵎⴰⵍⵃⴰⵏⵏⴰ</span> — morocco 🌍
+        <span className="arabic" style={{ color: "var(--accent2)" }}>
+          ⵎⵓⵃⴰⵎⵎⴷ ⴰⵎⴰⵍⵃⴰⵏⵏⴰ
+        </span>{" "}
+        — morocco 🌍
       </footer>
     </main>
   );

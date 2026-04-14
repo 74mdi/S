@@ -66,6 +66,18 @@ const ebGaramond = localFont({
   variable: "--font-garamond"
 });
 
+const notoSansTifinagh = localFont({
+  src: [
+    {
+      path: "./fonts/noto-sans-tifinagh-tifinagh-400-normal.woff2",
+      weight: "400",
+      style: "normal"
+    }
+  ],
+  display: "swap",
+  variable: "--font-tifinagh"
+});
+
 export const metadata: Metadata = {
   title: "7amdi",
   description: "7amdi personal site"
@@ -83,7 +95,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${jetbrainsMono.variable} ${ebGaramond.variable}`}>
+      <body
+        className={`${jetbrainsMono.variable} ${ebGaramond.variable} ${notoSansTifinagh.variable}`}
+      >
         {children}
       </body>
     </html>
