@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>7amdi</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,300;0,400;0,500;1,400&family=EB+Garamond:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #0e0d0b;
+      --surface: #151310;
+      --border: #2a2520;
+      --text: #c9bfad;
+      --muted: #7a6f60;
+      --accent: #c97a3a;
+      --accent2: #8fa67a;
+      --link: #b89a6a;
+      --link-hover: #e8c882;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 13.5px;
+      line-height: 1.7;
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 2rem 1.25rem 4rem;
+    }
+
+    /* NAV */
+    nav {
+      display: flex;
+      gap: 0.4rem;
+      align-items: center;
+      margin-bottom: 2rem;
+      flex-wrap: wrap;
+    }
+    nav a {
+      color: var(--accent);
+      text-decoration: none;
+      font-size: 13px;
+    }
+    nav a:hover { color: var(--link-hover); text-decoration: underline; }
+    nav span { color: var(--muted); }
+
+    /* AD BANNER */
+    .banner {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-left: 3px solid var(--accent);
+      padding: 0.5rem 0.9rem;
+      margin-bottom: 2rem;
+      font-size: 12px;
+      color: var(--muted);
+      font-style: italic;
+    }
+
+    /* GREETING */
+    .greeting {
+      margin-bottom: 1.6rem;
+      font-size: 13.5px;
+    }
+    .greeting p { margin-bottom: 0.5rem; }
+    .name { color: var(--accent); font-weight: 500; }
+    .aka { color: var(--accent2); }
+
+    a {
+      color: var(--link);
+      text-decoration: underline;
+      text-underline-offset: 2px;
+    }
+    a:hover { color: var(--link-hover); }
+
+    /* SECTION */
+    section { margin-bottom: 2.2rem; }
+
+    h2 {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--accent2);
+      margin-bottom: 0.8rem;
+      letter-spacing: 0.02em;
+    }
+
+    /* INFO TABLE */
+    .info-table {
+      display: grid;
+      grid-template-columns: minmax(110px, max-content) 1fr;
+      gap: 0.25rem 1.2rem;
+    }
+    .info-label { color: var(--muted); white-space: nowrap; }
+    .info-value { color: var(--text); }
+    .info-value .tag {
+      display: inline-block;
+      background: #1e1a14;
+      border: 1px solid var(--border);
+      color: var(--accent);
+      font-size: 11px;
+      padding: 0 5px;
+      border-radius: 2px;
+      margin-right: 3px;
+    }
+
+    /* CONTACT */
+    .contact-table {
+      display: grid;
+      grid-template-columns: minmax(90px, max-content) 1fr;
+      gap: 0.25rem 1.2rem;
+    }
+    .contact-label { color: var(--muted); }
+
+    /* TESTIMONIALS */
+    .testimonial {
+      position: relative;
+      padding: 0.5rem 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .testimonial:last-child { border-bottom: none; }
+    .testimonial p { font-style: italic; color: var(--text); margin-bottom: 0.15rem; }
+    .testimonial .by { color: var(--muted); font-size: 12px; }
+    .testimonial .by a { color: var(--accent2); }
+
+    /* GUESTBOOK */
+    .guestbook-title {
+      font-size: 12px;
+      color: var(--muted);
+      margin-bottom: 0.6rem;
+      font-style: italic;
+    }
+    .entry {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      padding: 0.6rem 0.8rem;
+      margin-bottom: 0.5rem;
+      font-size: 12.5px;
+    }
+    .entry-header {
+      display: flex;
+      gap: 0.5rem;
+      align-items: center;
+      margin-bottom: 0.25rem;
+    }
+    .entry-user { color: var(--accent); font-weight: 500; }
+    .entry-num { color: var(--muted); font-size: 11px; }
+    .entry-date { color: var(--muted); font-size: 11px; margin-left: auto; }
+    .entry-body { color: var(--text); }
+    .entry-reply { color: var(--muted); font-size: 12px; margin-top: 0.3rem; }
+    .entry-reply::before { content: '> '; }
+
+    /* GUESTBOOK FORM */
+    .gb-form {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      padding: 0.6rem 0.8rem;
+      margin-top: 0.5rem;
+    }
+    .gb-form input {
+      background: transparent;
+      border: none;
+      border-bottom: 1px solid var(--border);
+      color: var(--text);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 13px;
+      width: 100%;
+      padding: 0.3rem 0;
+      outline: none;
+    }
+    .gb-form input::placeholder { color: var(--muted); }
+    .gb-form-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 0.5rem;
+      font-size: 12px;
+      color: var(--muted);
+    }
+    .gb-form button {
+      background: var(--accent);
+      color: #000;
+      border: none;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      padding: 0.2rem 0.7rem;
+      cursor: pointer;
+    }
+    .gb-form button:hover { background: var(--link-hover); }
+
+    /* SUB-PAGES */
+    .sub-pages { list-style: none; }
+    .sub-pages li { margin-bottom: 0.6rem; }
+    .sub-pages .sub-comment { color: var(--muted); font-size: 12px; padding-left: 1rem; font-style: italic; }
+
+    /* ARABIC ACCENT */
+    .arabic { font-family: 'EB Garamond', serif; font-size: 16px; color: var(--accent); }
+
+    /* FOOTER */
+    footer {
+      margin-top: 3rem;
+      padding-top: 1rem;
+      border-top: 1px solid var(--border);
+      color: var(--muted);
+      font-size: 11.5px;
+    }
+
+    /* CURSOR BLINK */
+    .cursor::after {
+      content: '█';
+      animation: blink 1s step-end infinite;
+      color: var(--accent);
+      font-size: 11px;
+    }
+    @keyframes blink { 50% { opacity: 0; } }
+
+    /* SCROLL FADE-IN */
+    @keyframes fadein { from { opacity:0; transform:translateY(8px); } to { opacity:1; transform:none; } }
+    section { animation: fadein 0.5s ease both; }
+    section:nth-child(2) { animation-delay: 0.05s; }
+    section:nth-child(3) { animation-delay: 0.1s; }
+    section:nth-child(4) { animation-delay: 0.15s; }
+    section:nth-child(5) { animation-delay: 0.2s; }
+    section:nth-child(6) { animation-delay: 0.25s; }
+    section:nth-child(7) { animation-delay: 0.3s; }
+
+    @media (max-width: 480px) {
+      body { font-size: 12.5px; }
+      .info-table, .contact-table { grid-template-columns: 1fr; gap: 0; }
+      .info-label, .contact-label { color: var(--accent2); margin-top: 0.4rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a href="#">7amdi</a>
+    <span>/</span>
+    <a href="#">blog</a>
+    <span>/</span>
+    <a href="#">projects</a>
+    <span>/</span>
+    <a href="#">tools</a>
+  </nav>
+
+  <div class="banner">
+    you are browsing this on a screen. pixels are wasted without an ad blocker (and a good terminal).
+  </div>
+
+  <section class="greeting">
+    <p>mrhba~</p>
+    <p>
+      i am <span class="name">7amdi</span> aka <span class="aka">koko</span> <span class="arabic">ⵎⵓⵃⴰⵎⵎⴷ</span><br />
+      full-time web dev, part-time linux-breaker<br />
+      most of the stuff i'm proud of lives on my <a href="#">github</a>, the rest is still in my head
+    </p>
+  </section>
+
+  <section>
+    <h2>extremely interesting info (no):</h2>
+    <div class="info-table">
+      <span class="info-label">location</span>
+      <span class="info-value">🇲🇦 morocco, always</span>
+
+      <span class="info-label">langs</span>
+      <span class="info-value">
+        <span class="tag">darija</span>
+        <span class="tag">fr</span>
+        <span class="tag">en</span>
+        <span class="tag">tamazight</span>
+      </span>
+
+      <span class="info-label">last seen</span>
+      <span class="info-value"><a href="#">github/7amdi</a>: pushing at 2am, just now</span>
+
+      <span class="info-label">current mood</span>
+      <span class="info-value">debugging something i wrote yesterday</span>
+
+      <span class="info-label">tokens wasted</span>
+      <span class="info-value">past 30d: uncountable<br />all time: astronomical</span>
+
+      <span class="info-label">fav color</span>
+      <span class="info-value" style="display:flex;align-items:center;gap:6px;"><span style="display:inline-block;width:12px;height:12px;background:#c97a3a;border-radius:2px;"></span> #c97a3a (terracotta)</span>
+
+      <span class="info-label">fav os</span>
+      <span class="info-value">fedora linux (gnome) — always</span>
+
+      <span class="info-label">fav editor</span>
+      <span class="info-value">windsurf ide w/ claude inside</span>
+
+      <span class="info-label">fav font</span>
+      <span class="info-value">EB Garamond + JetBrains Mono</span>
+
+      <span class="info-label">interests</span>
+      <span class="info-value">quran, minecraft, music, local AI, hardware tinkering, linux sysadmin rabbit holes</span>
+
+      <span class="info-label">stack</span>
+      <span class="info-value">
+        <span class="tag">next.js 14</span>
+        <span class="tag">ts</span>
+        <span class="tag">tailwind</span>
+        <span class="tag">prisma</span>
+        <span class="tag">shadcn</span>
+      </span>
+    </div>
+  </section>
+
+  <section>
+    <h2>contact me (in order of preference):</h2>
+    <div class="contact-table">
+      <span class="contact-label">github</span>
+      <a href="#">@7amdi</a>
+
+      <span class="contact-label">telegram</span>
+      <span>ask nicely first</span>
+
+      <span class="contact-label">matrix</span>
+      <span>somewhere out there</span>
+
+      <span class="contact-label">email</span>
+      <span>koko [at] 7amdi [dot] dev</span>
+
+      <span class="contact-label">carrier pigeon</span>
+      <span>please don't</span>
+
+      <span class="contact-label">post pigeons</span>
+      <span>absolutely not</span>
+    </div>
+  </section>
+
+  <section>
+    <h2>testimonials from THEM:</h2>
+    <div class="testimonial">
+      <p>"bro ships faster than my CI pipeline" </p>
+      <div class="by">— <a href="#">someone on github</a></div>
+    </div>
+    <div class="testimonial">
+      <p>"why does your site have a Quran reader, a tools suite, AND a saas platform, who ARE you"</p>
+      <div class="by">— <a href="#">confused internet person</a></div>
+    </div>
+    <div class="testimonial">
+      <p>"he broke his bootloader twice and fixed it twice. king behavior"</p>
+      <div class="by">— <a href="#">refind user support thread</a></div>
+    </div>
+    <div class="testimonial">
+      <p>"uses claude to prompt claude to code. ouroboros of productivity"</p>
+      <div class="by">— <a href="#">windsurf IDE session log</a></div>
+    </div>
+    <div class="testimonial">
+      <p>"4gb ram and still running a minecraft server, local llm, AND a browser"</p>
+      <div class="by">— <a href="#">my laptop fans</a></div>
+    </div>
+    <p style="color:var(--muted);font-size:12px;margin-top:0.7rem;">// feel free to leave yours :3</p>
+  </section>
+
+  <section>
+    <h2>guestbook</h2>
+    <p class="guestbook-title">// entries are pre-moderated, vibes only.</p>
+
+    <div class="entry">
+      <div class="entry-header">
+        <span class="entry-user">nexahub_fan</span>
+        <span class="entry-num">#001</span>
+        <span class="entry-date">2026-03-15 22:10</span>
+      </div>
+      <div class="entry-body">when is nexahub dropping?? ive been waiting</div>
+      <div class="entry-reply">soon™. it's a 500+ feature saas, give me a minute</div>
+    </div>
+
+    <div class="entry">
+      <div class="entry-header">
+        <span class="entry-user">linuxenjoyer</span>
+        <span class="entry-num">#002</span>
+        <span class="entry-date">2026-03-28 00:43</span>
+      </div>
+      <div class="entry-body">fedora + rEFInd + custom theme?? you're too real for this world</div>
+      <div class="entry-reply">the bootloader saga was painful but the theme was worth it</div>
+    </div>
+
+    <div class="entry">
+      <div class="entry-header">
+        <span class="entry-user">kokotools_user</span>
+        <span class="entry-num">#003</span>
+        <span class="entry-date">2026-04-01 14:22</span>
+      </div>
+      <div class="entry-body">koko quran is genuinely the cleanest quran site ive ever used, masha allah</div>
+    </div>
+
+    <div class="gb-form">
+      <input type="text" placeholder="leave a message~" class="cursor" />
+      <div class="gb-form-footer">
+        <span>☐ as private message</span>
+        <button>send</button>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>active projects:</h2>
+    <ul class="sub-pages">
+      <li>
+        - <a href="#">koko quran</a>
+        <div class="sub-comment">// full quran reader + 74 reciters, animated, audio player</div>
+      </li>
+      <li>
+        - <a href="#">koko tools</a>
+        <div class="sub-comment">// 300+ browser tools, no external apis, always offline-safe</div>
+      </li>
+      <li>
+        - <a href="#">nexahub</a>
+        <div class="sub-comment">// saas platform, 500+ features, still cooking 👨‍🍳</div>
+      </li>
+      <li>
+        - <a href="#">dot files</a>
+        <div class="sub-comment">// fedora configs, rEFInd theme, gnome tweaks</div>
+      </li>
+    </ul>
+  </section>
+
+  <footer>
+    <span>7amdi © 2026 — built with next.js, caffeine, and claude </span><br />
+    <span style="color:var(--accent2);">ⵎⵓⵃⴰⵎⵎⴷ ⴰⵎⴰⵍⵃⴰⵏⵏⴰ</span> — morocco 🌍
+  </footer>
+
+</body>
+</html>
