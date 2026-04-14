@@ -59,7 +59,7 @@ export default async function HomePage() {
           i am <span className="name">7amdi</span> aka <span className="aka">koko</span>{" "}
           <span className="arabic">ⵎⵓⵃⴰⵎⵎⴷ</span>
           <br />
-          i build web stuff and break linux for sport
+          i build web stuff and break linux 3lah? diha fmok
           <br />
           you can stalk my code on{" "}
           <a href="https://github.com/74mdi" target="_blank" rel="noopener noreferrer">
@@ -73,12 +73,11 @@ export default async function HomePage() {
         <h2>tiny facts about me:</h2>
         <div className="info-table">
           <span className="info-label">location</span>
-          <span className="info-value">🇲🇦 morocco</span>
+          <span className="info-value">lhih</span>
 
           <span className="info-label">langs</span>
           <span className="info-value">
             <span className="tag">darija</span>
-            <span className="tag">fr</span>
             <span className="tag">en</span>
             <span className="tag">tamazight</span>
           </span>
@@ -89,7 +88,7 @@ export default async function HomePage() {
           </span>
 
           <span className="info-label">current mood</span>
-          <span className="info-value">debugging my own bug from yesterday</span>
+          <span className="info-value">diha fmok</span>
 
           <span className="info-label">listening</span>
           <span className="info-value min-h-[1.25rem]">
@@ -103,9 +102,9 @@ export default async function HomePage() {
 
           <span className="info-label">tokens wasted</span>
           <span className="info-value">
-            past 30d: way too many
+            past 30d: bzff
             <br />
-            all time: enough to heat a small house
+            all time: bzf mn bzfff
           </span>
 
           <span className="info-label">fav color</span>
@@ -121,7 +120,7 @@ export default async function HomePage() {
           <span className="info-value">fedora linux (gnome)</span>
 
           <span className="info-label">fav editor</span>
-          <span className="info-value">cursor + terminal + coffee</span>
+          <span className="info-value">cursor</span>
 
           <span className="info-label">fav font</span>
           <span className="info-value">EB Garamond + JetBrains Mono</span>
@@ -154,11 +153,11 @@ export default async function HomePage() {
           <span className="contact-label">telegram</span>
           <span>ask first</span>
 
-          <span className="contact-label">matrix</span>
+          <span className="contact-label">X</span>
           <span>i forget to check it, but yes</span>
 
           <span className="contact-label">email</span>
-          <span>koko [at] 7amdi [dot] dev</span>
+          <span>7amdi [at] tuta [dot] io</span>
 
           <span className="contact-label">carrier pigeon</span>
           <span>wrong continent</span>
@@ -208,12 +207,7 @@ export default async function HomePage() {
       </section>
 
       <footer className="section-fade fade-delay-6">
-        <span>7amdi © 2026 · built with next.js, caffeine, and stubbornness </span>
-        <br />
-        <span className="arabic" style={{ color: "var(--accent2)" }}>
-          ⵎⵓⵃⴰⵎⵎⴷ ⴰⵎⴰⵍⵃⴰⵏⵏⴰ
-        </span>{" "}
-        — morocco 🌍
+        <span>7amdi © 2026</span>
       </footer>
     </main>
   );

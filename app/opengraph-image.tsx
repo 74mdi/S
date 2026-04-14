@@ -34,7 +34,7 @@ export default function OpenGraphImage() {
           }}
         >
           <span>{"<"}</span>
-          <span>7amdi.dev</span>
+          <span>koko911.vercel.app</span>
           <span>{"/>"}</span>
         </div>
 
@@ -54,7 +54,7 @@ export default function OpenGraphImage() {
           }}
         >
           <span>@74mdi</span>
-          <span>morocco</span>
+          <span>koko</span>
         </div>
       </div>
     ),

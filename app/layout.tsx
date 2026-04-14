@@ -2,7 +2,7 @@ import type { Metadata, Viewport } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://7amdi.dev";
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://koko911.vercel.app";
 
 const jetbrainsMono = localFont({
   src: [
@@ -87,7 +87,7 @@ export const metadata: Metadata = {
     template: "%s | 7amdi"
   },
   description:
-    "7amdi personal site. Web experiments, projects, guestbook, and notes from Morocco.",
+    "7amdi personal site. Web experiments, projects, guestbook, and notes.",
   applicationName: "7amdi",
   keywords: [
     "7amdi",
@@ -108,7 +108,7 @@ export const metadata: Metadata = {
     url: siteUrl,
     title: "7amdi",
     description:
-      "Web experiments, projects, guestbook, and notes from Morocco.",
+      "Web experiments, projects, guestbook, and notes.",
     siteName: "7amdi",
     locale: "en_US",
     images: [
