@@ -56,7 +56,7 @@ export default async function HomePage() {
       <section className="greeting section-fade fade-delay-1">
         <p>salam~</p>
         <p>
-          ana <span className="name">mohamed</span> aka <span className="aka">7amdi</span>
+          ana <span className="name">mohamed</span> aka <span className="aka">7amdi</span> <br />
           i build web stuff and break linux 3lah? diha fmok
           <br />
         </p>
